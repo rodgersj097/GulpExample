@@ -5,7 +5,7 @@ var minifyCSS = require("gulp-clean-css");
 var uglify = require("gulp-uglify");
 var rename = require("gulp-rename");
 var changed = require("gulp-changed");
-var minifyHtml = require("gulp-minify-html")
+var htmlMin = require("gulp-htmlmin")
 var minifyCss = require('gulp-minify-css')
 var concat = require('gulp-concat')
 var { series, parallel } = gulp
@@ -15,8 +15,8 @@ var { series, parallel } = gulp
 
 var SCSS_DEST = "./src/Assets/SCSS/*.scss";
 var SCSS_SRC = "./src/Assets/CSS";
-var CSS_DEST = './src/Assets/CSS'
-
+var CSS_DEST = './src/Assets/CSS' 
+//gulp gulp-css-scss gulp-clean-css gulp-uglify gulp-rename gulp-changed gulp-htmlmin gulp-minify-css gulp-concat
 
 //CSS to SCSS 
 gulp.task('css-scss', () => {
@@ -28,9 +28,9 @@ gulp.task('css-scss', () => {
 //Minify HTML 
 gulp.task('minify-html', function () {
   return gulp
-    .src('public/*.html')
-    .pipe(minifyHtml())
-    .pipe(gulp.dest('public'))
+    .src('/public/*.html')
+    .pipe(htmlMin({ collapseWhitespace: true }))
+    .pipe(gulp.dest('/public'))
 })
 
 
@@ -51,6 +51,6 @@ gulp.task('concat', function () {
 })
 
 
+gulp.task("runAllInSeries", series('minify-html', 'minify-css', 'concat'))
 
-
-gulp.task("default", gulp.series("watch_scss", function () { }));
+gulp.task("default", gulp.series("minify-html", function () { }));
