@@ -1,0 +1,19 @@
+body {
+  font-family: "Open sans", sans-serif;
+  font-size: 18px;
+  color: black;
+  font-weight: 400;
+  font-stretch: normal;
+}
+
+@mixin translateY($e) {
+  --webkit-transform: translateY($e);
+  --moz-transform: translateY($e);
+  transform: translateY($e);
+}
+
+@mixin transition($e) {
+  --webkit-transform: $e;
+  --moz-transform: $e;
+  transform: $e;
+}
